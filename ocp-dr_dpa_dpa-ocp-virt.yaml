@@ -1,0 +1,34 @@
+apiVersion: oadp.openshift.io/v1alpha1
+kind: DataProtectionApplication
+metadata:
+  name: dpa-ocp-virt
+  namespace: openshift-adp
+spec:
+  configuration:
+    velero:
+      defaultPlugins:
+        - kubevirt
+        - aws
+        - csi
+        - openshift
+      resourceTimeout: 10m
+    nodeAgent:
+      enable: true
+      uploaderType: kopia
+  backupLocations:
+    - velero:
+        config:
+          profile: "default"
+          region: us-east-1
+          s3Url: 'https://ceph-single-node.ceph.test.com'
+          s3ForcePathStyle: "true"
+        provider: aws
+        default: true
+        credential:
+          key: cloud
+          name:  cloud-credentials
+        objectStorage:
+          bucket: s3-gateway
+          prefix: velero
+          caCert: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURZekNDQWt1Z0F3SUJBZ0lCQVRBTkJna3Foa2lHOXcwQkFRc0ZBREFwTVNjd0pRWURWUVFEREI1alpYQm8KTFhOcGJtZHNaUzF1YjJSbExtTmxjR2d1ZEdWemRDNWpiMjB3SGhjTk1qVXhNREExTVRrd09USTFXaGNOTkRVdwpPVE13TVRrd09USTFXakFwTVNjd0pRWURWUVFEREI1alpYQm9MWE5wYm1kc1pTMXViMlJsTG1ObGNHZ3VkR1Z6CmRDNWpiMjB3Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLQW9JQkFRREpuT0NqYWx5RmZJOCsKQ1BlRDR2Z2loSWV1ekdMcTh6cE42MWpMci9aRFZaVUZGLzNVU3g2YWNCNFA2ZTVmRU4rT2FCMEdIa3JvM0lmVgpUcy9QUk1GT1FZa1k5QlVuMEtaanpXWGlvczcyZTV0ZlRLRlJod204cVFyUkhvK1dobXpNY0pKcksyL3V5c1RTCnlYdDFrYlR4RXpBQnY2RitWOW1EWHhEcitjWWRUdlg2MTRpNTVXNFZabUV6dk5oVm1KeE5WNlRLWWlTMEdiY1IKWGRScHRRMEYwWVNKTENYL1lpNFZHbXJsSWkvS2RUM1NpeE5QRW1jNEdhcWprQjBXRFFpSVBZZXI4TGQzQ3FRTAo0UURBSGxSR0cvK25LVVpibWxzZWhMU3hFc0RyRXBoaElNemNoY2YvQUdwdlR0VXVES2FNZ3cvK1BHaVpGbFRwCmxyMUNrRGZOQWdNQkFBR2pnWlV3Z1pJd0hRWURWUjBPQkJZRUZEZXk2UmpUOUM3ZVFqU3V1THhQeVpZWEJsMHkKTUI4R0ExVWRJd1FZTUJhQUZEZXk2UmpUOUM3ZVFqU3V1THhQeVpZWEJsMHlNQThHQTFVZEV3RUIvd1FGTUFNQgpBZjh3RGdZRFZSMFBBUUgvQkFRREFnSEdNQzhHQTFVZEVRUW9NQ2FDSG1ObGNHZ3RjMmx1WjJ4bExXNXZaR1V1ClkyVndhQzUwWlhOMExtTnZiWWNFd0tqNkxEQU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFKNzNuYno1ZVRnZE4KNkVEUkRPNWkrN0hmVmNLQjdiSTh0OXIzZkVQZklUazBiL0tTOVJnSCt6cjdtQk5BRW1CM0NzaGF0MW9kVG1lVQpWa0pFcSs3dkJkY0R5R0N4ZVV4Uno3OEtaQlNZQTZmaVFLamNkMzAxeEY4dE0wOHp5cmhOdHJaUFVSVEVvSXY1CkN2RzAxUGhBcVlaNVNhNUtvalFUTWdmZ1ZJbmR3MWN2ZWhMeGVTaGk2cGRSTFBldkpZenBrYTRDZkJ3Q1VxU1MKeXVyS3N0M2dDNjQ3MVZGditqVlcxR0xMa0Q3RmN4bHlJQmlCKzZKSmFKb1ZvRlFDK1M1NnE5WVp1dnZtbmQ1OApObDZDZ1BhcXl1OXlwaTlJUjdUeDFEOWtscVVkYjJrRFFkaitKYzdRQkhxZGN3NUswVGJuN3IreDRkd3pZQzZkClN0WW0yRyt4c3c9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+
